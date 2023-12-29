@@ -59,6 +59,7 @@ Currently the script uses the following bookmakers to find arbitrage opportuniti
 - Unibet
 
 ## Acknowledgements
+Project inspired by the following sources:
 - **How Web Scraping is Transforming the World with its Applications** by Hiren Patel (https://towardsdatascience.com/https-medium-com-hiren787-patel-web-scraping-applications-a6f370d316f4)
 - **How I got banned from sports betting... - Arbitrage Betting Explained** by New Money (https://www.youtube.com/watch?v=TGinzvSDayU)
 - **I Used Arbitrage Betting Strategy for 30 Days – Results & Explanation** by Caan Berry Pro Trader (https://www.youtube.com/watch?v=gsXcOpmf75U)
