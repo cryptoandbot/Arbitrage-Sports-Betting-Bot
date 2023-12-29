@@ -14,33 +14,58 @@ nba_urls = [
     ("UNIBET", "https://www.unibet.com.au/betting/sports/filter/basketball/nba/all/matches"),
 ]
 
-def redirector_function(driver, url_tuple):
-    bookie = url_tuple[0]
-    match bookie:
+def get_teams_playing(driver):
+    driver.get("https://www.nba.com/schedule")
+
+    # num_games_element.text should be in the format "x Games"
+    num_games_element = driver.find_element(By.CLASS_NAME, "ScheduleDay_sdWeek__iiTmo")
+    num_games = int(num_games_element.text[0])
+
+    name_elements = driver.find_elements(By.CSS_SELECTOR, "a[data-id*='team']")
+
+    names = []
+    for element in name_elements:
+        if not element.text == '':
+            names.append(element.text)
+        if len(names) == num_games * 2:
+            break
+    
+    team_dict = {}
+    for name in names:
+        team_dict[name] = 0.00
+
+    return names, team_dict
+
+def redirector_function(driver, bookie_info, team_dict):
+    bookie_name = bookie_info[0]
+    bookie_url = bookie_info[1]
+
+    match bookie_name:
         case "LADBROKES":
-            print('running for ladbrokes')
+            print("Running for Ladbrokes")
         case "SPORTSBET":
-            print('running for sportsbet')
+            print("Running for Sportsbet")
         case "BLUEBET":
-            print('running for bluebet')
+            print("Running for Bluebet")
         case "PLAYUP":
-            print('running for playup')
+            print("Running for Playup")
         case "BET365":
-            print('running for bet365')
+            print("Running for Bet365")
         case "TAB":
-            print('running for tab')
+            print("Running for TAB")
         case "POINTSBET":
-            print('running for pointsbet')
+            print("Running for Pointsbet")
         case "UNIBET":
-            print('running for unibet')
+            print("Running for Unibet")
         case _:
-            print('?????')
+            print(f"Invalid url: {bookie_url}")
 
 def main():
     driver = webdriver.Chrome()
-    for url_tuple in nba_urls:
-        redirector_function(driver, url_tuple)
-        
+    team_names, team_dict = get_teams_playing(driver)
+    for bookie_info in nba_urls:
+        redirector_function(driver, bookie_info, team_dict)
+
     # driver.get("https://www.sportsbet.com.au/betting/basketball-us/nba")
 
     # filter = driver.find_element(By.CSS_SELECTOR, "[data-automation-id='market-filter-select']")
