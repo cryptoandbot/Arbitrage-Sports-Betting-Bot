@@ -23,8 +23,8 @@ We can exploit the variation in odds offered by different bookmakers to ensure a
 by Sportsbet on a NY Knicks vs Orlando Magic game on 30/12/23. The odds of 2.00 and 1.85 respectively suggest that the bookmaker believes that the Knicks have a 50% chance of winning, and that the
 Magic has a 54.05% chance of winning. This is calculated by taking 1 divided by the odds offered (1/odds). 
 
-You'll notice that the probability adds up to over 100%. This essentially means that if you bet on both outcomes, you'll lose a little bit of money each time, ensuring the bookie makes money (most of the time). 
-However, in rare cases where the probability sums to under 100%, there is an arbitrage betting opportunity, and you can therefore profit regardless of the game's outcome. Taking the same scenario, suppose I found a bookmaker who offered odds of 2.10 for the Magic to win. Again, summing their inverses, we get 1/2.00 + 1/2.10 = 97.62%. This represents an arbitrage opportunity (as it's below 100%) and we can place wagers proportional to the odds to guarantee profit.
+You'll notice that the probability adds up to over 100%. This essentially means that if you bet on both outcomes, you'll lose a little bit of money each time, ensuring the bookie makes money.
+However, in rare cases, you'll find odds that result in a probability that sums to under 100%, representing an arbitrage betting opportunity. Taking the same scenario, suppose I found a bookmaker who offered odds of 2.10 for the Magic to win. Summing the inverses of the odds, we get 1/2.00 + 1/2.10 = 97.62%. This represents an arbitrage opportunity (as it's below 100%) and we can place wagers proportional to the betting odds to guarantee profit.
 
 ## Disclaimer
 Please gamble responsibly. I am not promoting gambling, this is just for my own personal interest and practice in Python. Also if you use this,
