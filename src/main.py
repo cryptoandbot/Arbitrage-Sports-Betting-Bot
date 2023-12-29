@@ -100,18 +100,19 @@ def redirector_function(driver, bookie_info, team_dict):
 
 def main():
     nba_urls = [
-    ("LADBROKES", "https://www.ladbrokes.com.au/sports/basketball/usa/nba"), 
-    ("SPORTSBET", "https://www.sportsbet.com.au/betting/basketball-us/nba"),
-    ("BLUEBET", "https://www.bluebet.com.au/sports/Basketball/107/United-States-of-America/NBA-Matches/39251"),
-    ("PLAYUP", "https://www.playup.com.au/betting/sports/basketball/nba"),
-    ("BET365", "https://www.bet365.com.au/#/AS/B18/"),
-    ("TAB", "https://www.tab.com.au/sports/betting/Basketball/competitions/NBA"),
-    ("POINTSBET", "https://pointsbet.com.au/sports/basketball/NBA"),
-    ("UNIBET", "https://www.unibet.com.au/betting/sports/filter/basketball/nba/all/matches"),
+        ("LADBROKES", "https://www.ladbrokes.com.au/sports/basketball/usa/nba"), 
+        ("SPORTSBET", "https://www.sportsbet.com.au/betting/basketball-us/nba"),
+        ("BLUEBET", "https://www.bluebet.com.au/sports/Basketball/107/United-States-of-America/NBA-Matches/39251"),
+        ("PLAYUP", "https://www.playup.com.au/betting/sports/basketball/nba"),
+        ("BET365", "https://www.bet365.com.au/#/AS/B18/"),
+        ("TAB", "https://www.tab.com.au/sports/betting/Basketball/competitions/NBA"),
+        ("POINTSBET", "https://pointsbet.com.au/sports/basketball/NBA"),
+        ("UNIBET", "https://www.unibet.com.au/betting/sports/filter/basketball/nba/all/matches"),
     ]
 
     driver = webdriver.Chrome()
     team_names, team_dict = get_teams_playing(driver)
+    
     for bookie_info in nba_urls:
         redirector_function(driver, bookie_info, team_dict)
 
