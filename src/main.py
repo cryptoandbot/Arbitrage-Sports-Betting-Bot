@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from datetime import datetime
 from datetime import timedelta
 from tabulate import tabulate
+import time
 
 def get_teams_playing(driver):
     # Note that a game played on the 30th of Dec (Sydney time) is listed as a game
@@ -14,6 +15,7 @@ def get_teams_playing(driver):
     formatted_date_yesterday = yesterday.strftime("%A, %B %d").upper()
 
     driver.get("https://www.nba.com/schedule")
+    time.sleep(1)
     
     dates_elements = driver.find_elements(By.CLASS_NAME, "ScheduleDay_sdDay__3s2Xt")
     num_games_elements = driver.find_elements(By.CLASS_NAME, "ScheduleDay_sdWeek__iiTmo")
@@ -56,8 +58,31 @@ def get_teams_playing(driver):
 
     return names, team_dict
 
+def find_ladbrokes_odds(driver, team_dict, bookie_url):
+    driver.get(bookie_url)
+    time.sleep(1)
+
+    odds_elements = driver.find_elements(By.CSS_SELECTOR, "span[data-testid='price-button-odds']")
+    name_elements = driver.find_elements(By.CLASS_NAME, "displayTitle")
+
+    # Odds and team at same index correspond to each other
+    odds = [odd.text for odd in odds_elements]
+    teams = [name.text for name in name_elements]
+    
+    for i in range(len(odds)):
+        # Account for differences in team names on Ladbrokes vs the NBA schedule
+        team_name = teams[i]
+        if team_name == "Los Angeles Clippers":
+            team_name = "LA Clippers"
+
+        # Check if any odds are better at Ladbrokes and update accordingly
+        betting_odds = float(odds[i])
+        if team_dict[team_name][0] < betting_odds:
+            team_dict[team_name] = (betting_odds, "LADBROKES") 
+
 def find_sportsbet_odds(driver, team_dict, bookie_url):
     driver.get(bookie_url)
+    time.sleep(1)
 
     filter = driver.find_element(By.CSS_SELECTOR, "[data-automation-id='market-filter-select']")
     select = Select(filter)
@@ -67,7 +92,7 @@ def find_sportsbet_odds(driver, team_dict, bookie_url):
     name_elements = driver.find_elements(By.CLASS_NAME, "size12_fq5j3k2.normal_fgzdi7m.caption_f4zed5e")
 
     # Odds and team at same index correspond to each other
-    odds = [element.text for element in odds_elements]
+    odds = [odd.text for odd in odds_elements]
     teams = [name.text for name in name_elements]
 
     for i in range(len(odds)):
@@ -88,10 +113,10 @@ def redirector_function(driver, bookie_info, team_dict):
     match bookie_name:
         case "LADBROKES":
             print("Running for Ladbrokes")
+            find_ladbrokes_odds(driver, team_dict, bookie_url)
         case "SPORTSBET":
             print("Running for Sportsbet")
             find_sportsbet_odds(driver, team_dict, bookie_url)
-            print(team_dict)
         case "BLUEBET":
             print("Running for Bluebet")
         case "PLAYUP":
@@ -126,6 +151,8 @@ def main():
         redirector_function(driver, bookie_info, team_dict)
 
     driver.quit()
+
+    print(team_dict)
 
 if __name__ == "__main__":
     main()
