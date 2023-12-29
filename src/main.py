@@ -49,10 +49,10 @@ def get_teams_playing(driver):
         if len(names) == num_games * 2:
             break
     
-    # Create dictionary with team names and betting odds as key-value pairs
+    # Create dictionary with team names and betting odds + bookmaker as key-value pairs
     team_dict = {}
     for name in names:
-        team_dict[name] = 0.00
+        team_dict[name] = (0.00, "default")
 
     return names, team_dict
 
@@ -70,9 +70,17 @@ def find_sportsbet_odds(driver, team_dict, bookie_url):
     odds = [element.text for element in odds_elements]
     teams = [name.text for name in name_elements]
 
-    print(odds)
-    print(teams)
+    for i in range(len(odds)):
+        # Account for differences in team names on Sportsbet vs the NBA schedule
+        team_name = teams[i]
+        if team_name == "Los Angeles Clippers":
+            team_name = "LA Clippers"
 
+        # Check if any odds are better at Sportsbet and update accordingly
+        betting_odds = float(odds[i])
+        if team_dict[team_name][0] < betting_odds:
+            team_dict[team_name] = (betting_odds, "SPORTSBET") 
+            
 def redirector_function(driver, bookie_info, team_dict):
     bookie_name = bookie_info[0]
     bookie_url = bookie_info[1]
@@ -83,6 +91,7 @@ def redirector_function(driver, bookie_info, team_dict):
         case "SPORTSBET":
             print("Running for Sportsbet")
             find_sportsbet_odds(driver, team_dict, bookie_url)
+            print(team_dict)
         case "BLUEBET":
             print("Running for Bluebet")
         case "PLAYUP":
@@ -112,7 +121,7 @@ def main():
 
     driver = webdriver.Chrome()
     team_names, team_dict = get_teams_playing(driver)
-    
+
     for bookie_info in nba_urls:
         redirector_function(driver, bookie_info, team_dict)
 
