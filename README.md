@@ -27,7 +27,7 @@ You'll notice that the probability adds up to over 100%. This essentially means 
 However, in rare cases, you'll find odds that result in a probability that sums to under 100%, representing an arbitrage betting opportunity. Taking the same scenario, suppose I found a bookmaker who offered odds of 2.10 for the Magic to win. Summing the inverses of the odds, we get 1/2.00 + 1/2.10 = 97.62%. This represents an arbitrage opportunity (as it's below 100%) and we can place wagers proportional to the betting odds to guarantee profit.
 
 ## Disclaimer
-Please gamble responsibly. I am not promoting gambling, this is just for my own personal interest and practice in Python. Also if you use this,
+Please gamble responsibly. I am not promoting gambling and this is just for my own personal interest and practice in Python. Also if you use this,
 please ensure that the odds are the same as stated from the script because sometimes bookmakers can change the odds very quickly.
 
 ## Prerequisites
