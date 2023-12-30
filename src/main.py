@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from tabulate import tabulate
 import time
 
@@ -63,8 +65,76 @@ def find_playup_odds(driver, team_dict, bookie_url):
         except ValueError:
             print(f"Team {team} not found in odds list")
 
+# def find_bet365_odds(driver, team_dict, bookie_url):
+#     driver.get(bookie_url)
 
-            
+#     # Wait for website to load properly
+#     wait = WebDriverWait(driver, 15)
+#     wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "sac-ParticipantOddsOnly50OTB_Odds")))
+
+#     odds_elements = driver.find_elements(By.CLASS_NAME, "sac-ParticipantOddsOnly50OTB_Odds")
+#     odds = [odd.text for odd in odds_elements]
+#     print(odds)
+
+# def find_tab_odds(driver, team_dict, bookie_url):
+#     driver.get(bookie_url)
+#     time.sleep(1)
+#     elements = driver.find_elements(By.CSS_SELECTOR, "animate-odd")
+
+#     for element in elements:
+#         print(element.text)
+
+def find_pointsbet_odds(driver, team_dict, bookie_url):
+    driver.get(bookie_url)
+    time.sleep(1)
+
+    odds_elements = driver.find_elements(By.CLASS_NAME, "fheif50")
+    name_elements = driver.find_elements(By.CLASS_NAME, "f193t5zp.f1r0ggt8.f1wtz5iq.f1rokedd")
+    
+    # Odds are in order of H2H, Line and Total, and therefore I only want the 1st,
+    # 4th, 7th and so on numbers
+    counter = 0
+    odds = []
+    for odd_element in odds_elements:
+        if counter % 3 == 0:
+            odds.append(odd_element.text)
+        counter += 1
+
+    names = [name.text for name in name_elements]
+
+    for i in range(len(odds)):
+        team_name = names[i]
+
+        # Check if any odds are better at Pointsbet and update accordingly
+        betting_odds = float(odds[i])
+        if team_dict[team_name][0] < betting_odds:
+            team_dict[team_name] = (betting_odds, "POINTSBET") 
+
+def find_unibet_odds(driver, team_dict, bookie_url):
+    driver.get(bookie_url)
+    time.sleep(1)
+
+    odds_elements = driver.find_elements(By.CLASS_NAME, "_8e013")
+    name_elements = driver.find_elements(By.CSS_SELECTOR, "div[data-test-name='teamName']")
+
+    # Odds are in order of Team 1 Win, Team 2 Win, Team 1 Moneyline, Team 2 Moneyline
+    counter = 0
+    odds = []
+    for odd_element in odds_elements:
+        if counter % 4 == 0 or counter % 4 == 1:
+            odds.append(odd_element.text)
+        counter += 1
+
+    names = [name.text for name in name_elements]
+
+    for i in range(len(odds)):
+        team_name = names[i]
+
+        # Check if any odds are better at Unibet and update accordingly
+        betting_odds = float(odds[i])
+        if team_dict[team_name][0] < betting_odds:
+            team_dict[team_name] = (betting_odds, "UNIBET") 
+      
 def redirector_function(driver, bookie_info, team_dict):
     bookie_name = bookie_info[0]
     bookie_url = bookie_info[1]
@@ -78,19 +148,22 @@ def redirector_function(driver, bookie_info, team_dict):
             find_sportsbet_odds(driver, team_dict, bookie_url)
         case "BLUEBET":
             print("Running for Bluebet")
-            # find_bluebet_odds(driver, team_dict, bookie_url)
+            # # find_bluebet_odds(driver, team_dict, bookie_url)
         case "PLAYUP":
             print("Running for Playup")
             find_playup_odds(driver, team_dict, bookie_url)
         case "BET365":
             print("Running for Bet365")
-            find_bet365_odds(driver, team_dict, bookie_url)
+            # # find_bet365_odds(driver, team_dict, bookie_url)
         case "TAB":
             print("Running for TAB")
+            # # find_tab_odds(driver, team_dict, bookie_url)
         case "POINTSBET":
             print("Running for Pointsbet")
+            find_pointsbet_odds(driver, team_dict, bookie_url)
         case "UNIBET":
             print("Running for Unibet")
+            find_unibet_odds(driver, team_dict, bookie_url)
         case _:
             print(f"Invalid url: {bookie_url}")
 
@@ -100,7 +173,7 @@ def main():
         ("SPORTSBET", "https://www.sportsbet.com.au/betting/basketball-us/nba"),
         ("BLUEBET", "https://www.bluebet.com.au/sports/Basketball/107/United-States-of-America/NBA-Matches/39251"),
         ("PLAYUP", "https://www.playup.com.au/betting/sports/basketball/nba"),
-        ("BET365", "https://www.bet365.com.au/#/AS/B18/"),
+        ("BET365", "https://www.bet365.com.au/#/AC/B18/C20604387/D48/E1453/F10/"),
         ("TAB", "https://www.tab.com.au/sports/betting/Basketball/competitions/NBA"),
         ("POINTSBET", "https://pointsbet.com.au/sports/basketball/NBA"),
         ("UNIBET", "https://www.unibet.com.au/betting/sports/filter/basketball/nba/all/matches"),
