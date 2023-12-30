@@ -1,62 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
-from datetime import datetime
-from datetime import timedelta
 from tabulate import tabulate
 import time
-
-def get_teams_playing(driver):
-    # Note that a game played on the 30th of Dec (Sydney time) is listed as a game
-    # on the 29th of December (US time)
-    yesterday = datetime.now() - timedelta(days=1)
-
-    # Format the date for yesterday
-    formatted_date_yesterday = yesterday.strftime("%A, %B %d").upper()
-
-    driver.get("https://www.nba.com/schedule")
-    time.sleep(1)
-    
-    dates_elements = driver.find_elements(By.CLASS_NAME, "ScheduleDay_sdDay__3s2Xt")
-    num_games_elements = driver.find_elements(By.CLASS_NAME, "ScheduleDay_sdWeek__iiTmo")
-
-    index = 0
-    for date in dates_elements:
-        # Done to ensure the correct set of games are selected
-        if date.text == formatted_date_yesterday:
-            break
-        index += 1
-
-    # tokenised_string should be in the format ['X', 'Games']
-    tokenised_string = num_games_elements[index].text.split()
-    num_games = int(tokenised_string[0])
-
-    # Necessary to ensure that the correct teams playing for the day are selected
-    ignore_num_games = 0
-    for i in range(index):
-        tokenised_string_ignore = num_games_elements[i].text.split()
-        ignore_num_games += int(tokenised_string_ignore[0])
-
-    name_elements = driver.find_elements(By.CSS_SELECTOR, "a[data-id*='team']")
-
-    # Create list of team names
-    names = []
-    ignored_counter = 0
-    for element in name_elements:
-        if not element.text == '':
-            if ignored_counter < ignore_num_games * 2:
-                ignored_counter += 1
-                continue
-            names.append(element.text)
-        if len(names) == num_games * 2:
-            break
-    
-    # Create dictionary with team names and betting odds + bookmaker as key-value pairs
-    team_dict = {}
-    for name in names:
-        team_dict[name] = (0.00, "default")
-
-    return names, team_dict
 
 def find_ladbrokes_odds(driver, team_dict, bookie_url):
     driver.get(bookie_url)
@@ -70,15 +16,11 @@ def find_ladbrokes_odds(driver, team_dict, bookie_url):
     teams = [name.text for name in name_elements]
     
     for i in range(len(odds)):
-        # Account for differences in team names on Ladbrokes vs the NBA schedule
         team_name = teams[i]
-        if team_name == "Los Angeles Clippers":
-            team_name = "LA Clippers"
-
-        # Check if any odds are better at Ladbrokes and update accordingly
         betting_odds = float(odds[i])
-        if team_dict[team_name][0] < betting_odds:
-            team_dict[team_name] = (betting_odds, "LADBROKES") 
+
+        # Construct dictionary using infomation from Ladbrokes
+        team_dict[team_name] = (betting_odds, "LADBROKES") 
 
 def find_sportsbet_odds(driver, team_dict, bookie_url):
     driver.get(bookie_url)
@@ -96,15 +38,32 @@ def find_sportsbet_odds(driver, team_dict, bookie_url):
     teams = [name.text for name in name_elements]
 
     for i in range(len(odds)):
-        # Account for differences in team names on Sportsbet vs the NBA schedule
         team_name = teams[i]
-        if team_name == "Los Angeles Clippers":
-            team_name = "LA Clippers"
 
         # Check if any odds are better at Sportsbet and update accordingly
         betting_odds = float(odds[i])
         if team_dict[team_name][0] < betting_odds:
             team_dict[team_name] = (betting_odds, "SPORTSBET") 
+
+def find_playup_odds(driver, team_dict, bookie_url):
+    driver.get(bookie_url)
+    time.sleep(1)
+
+    elements = driver.find_elements(By.CLASS_NAME, "py-1")
+    assorted_team_odds = [element.text for element in elements]
+
+    for team in team_dict:
+        try:
+            team_index = assorted_team_odds.index(team)
+            # Ensure the next item in the list is a number (odds)
+            if team_index + 1 < len(assorted_team_odds) and assorted_team_odds[team_index + 1].replace('.', '', 1).isdigit():
+                team_odds = float(assorted_team_odds[team_index + 1])
+                if team_dict[team][0] < team_odds:
+                    team_dict[team] = (team_odds, "PLAYUP")
+        except ValueError:
+            print(f"Team {team} not found in odds list")
+
+
             
 def redirector_function(driver, bookie_info, team_dict):
     bookie_name = bookie_info[0]
@@ -119,10 +78,13 @@ def redirector_function(driver, bookie_info, team_dict):
             find_sportsbet_odds(driver, team_dict, bookie_url)
         case "BLUEBET":
             print("Running for Bluebet")
+            # find_bluebet_odds(driver, team_dict, bookie_url)
         case "PLAYUP":
             print("Running for Playup")
+            find_playup_odds(driver, team_dict, bookie_url)
         case "BET365":
             print("Running for Bet365")
+            find_bet365_odds(driver, team_dict, bookie_url)
         case "TAB":
             print("Running for TAB")
         case "POINTSBET":
@@ -145,8 +107,8 @@ def main():
     ]
 
     driver = webdriver.Chrome()
-    team_names, team_dict = get_teams_playing(driver)
 
+    team_dict = {}
     for bookie_info in nba_urls:
         redirector_function(driver, bookie_info, team_dict)
 
