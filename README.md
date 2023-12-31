@@ -51,10 +51,7 @@ python3 src/main.py
 Currently the script uses the following bookmakers to find arbitrage opportunities:
 - Ladbrokes
 - Sportsbet
-- Bluebet
 - Playup
-- Bet365
-- TAB
 - Pointsbet
 - Unibet
 

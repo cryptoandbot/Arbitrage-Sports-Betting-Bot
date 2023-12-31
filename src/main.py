@@ -146,18 +146,9 @@ def redirector_function(driver, bookie_info, team_dict):
         case "SPORTSBET":
             print("Running for Sportsbet")
             find_sportsbet_odds(driver, team_dict, bookie_url)
-        case "BLUEBET":
-            print("Running for Bluebet")
-            # # find_bluebet_odds(driver, team_dict, bookie_url)
         case "PLAYUP":
             print("Running for Playup")
             find_playup_odds(driver, team_dict, bookie_url)
-        case "BET365":
-            print("Running for Bet365")
-            # # find_bet365_odds(driver, team_dict, bookie_url)
-        case "TAB":
-            print("Running for TAB")
-            # # find_tab_odds(driver, team_dict, bookie_url)
         case "POINTSBET":
             print("Running for Pointsbet")
             find_pointsbet_odds(driver, team_dict, bookie_url)
@@ -167,14 +158,28 @@ def redirector_function(driver, bookie_info, team_dict):
         case _:
             print(f"Invalid url: {bookie_url}")
 
+def tabulate_data(team_dict):
+    home_team = [team for i, team in enumerate(team_dict) if i % 2 == 0]
+    away_team = [team for i, team in enumerate(team_dict) if i % 2 != 0]
+
+    home_odds = [team_dict[team][0] for team in home_team]
+    away_odds = [team_dict[team][0] for team in away_team]
+
+    home_bookie = [team_dict[team][1] for team in home_team]
+    away_bookie = [team_dict[team][1] for team in away_team]
+
+    arb_opps = []
+    for i in range(len(home_odds)):
+        opp = (1/home_odds[i] + 1/away_odds[i]) * 100
+        arb_opps.append(opp)
+    
+    
+
 def main():
     nba_urls = [
         ("LADBROKES", "https://www.ladbrokes.com.au/sports/basketball/usa/nba"), 
         ("SPORTSBET", "https://www.sportsbet.com.au/betting/basketball-us/nba"),
-        ("BLUEBET", "https://www.bluebet.com.au/sports/Basketball/107/United-States-of-America/NBA-Matches/39251"),
         ("PLAYUP", "https://www.playup.com.au/betting/sports/basketball/nba"),
-        ("BET365", "https://www.bet365.com.au/#/AC/B18/C20604387/D48/E1453/F10/"),
-        ("TAB", "https://www.tab.com.au/sports/betting/Basketball/competitions/NBA"),
         ("POINTSBET", "https://pointsbet.com.au/sports/basketball/NBA"),
         ("UNIBET", "https://www.unibet.com.au/betting/sports/filter/basketball/nba/all/matches"),
     ]
@@ -187,7 +192,7 @@ def main():
 
     driver.quit()
 
-    print(team_dict)
+    tabulate_data(team_dict)
 
 if __name__ == "__main__":
     main()
