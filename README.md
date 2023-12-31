@@ -37,6 +37,8 @@ The email alert includes the following information:
 - The expected return and ROI for a given bet stake (default $100).
 - Arbitrage percentage indicating the profitability of the opportunity.
 
+A sample email alert can be seen here: https://imgur.com/a/6oP44W7
+
 ## Secure Email Credentials with a `.env` File
 
 ### Setting Up The `.env` File

@@ -43,14 +43,14 @@ def send_email(subject, message, recipient_email):
 
 def alert_if_arb_opp(home_team, away_team, arb_opps, home_bookie, home_odds, away_bookie, away_odds):
     for i, arb in enumerate(arb_opps):
-        if not arb < float(100):
+        if arb < float(100):
             home_bet, away_bet, expected_return, ROI = calculate_bet_size(arb, home_odds[i], away_odds[i])
             subject = "Arbitrage Opportunity Alert"
             message = f"An arbitrage opportunity exists in the game: {home_team[i]} vs {away_team[i]}.\n"\
                       f"Home Team Odds: {home_odds[i]} by {home_bookie[i]}.\n"\
                       f"Away Team Odds: {away_odds[i]} by {away_bookie[i]}.\n"\
-                      f"Arbitrage Percentage: {arb}%.\n\n"\
-                      f"For a bet of size $100, put ${home_bet} on {home_team[i]} and ${away_bet} on {away_team[i]}.\n"\
+                      f"Arbitrage Percentage: {round(arb, 2)}%.\n\n"\
+                      f"For a bet of size $100, put ${home_bet} on the {home_team[i]} and ${away_bet} on the {away_team[i]}.\n"\
                       f"This results in a return of ${expected_return} and a {ROI}% ROI.\n"
             recipient_email = os.getenv("RECIPIENT_EMAIL")
             send_email(subject, message, recipient_email)
