@@ -59,6 +59,8 @@ RECIPIENT_EMAIL=your_email@example.com
 ```
 This will automatically change your recipient email in the script.
 
+Here's what the email alert looks like: https://imgur.com/a/gj2k9Y6
+
 ## Disclaimer
 This tool is provided for educational and informational purposes only. It is important to note that gambling involves significant financial risk and may not be suitable for everyone. I do not promote or endorse gambling. Users are advised to exercise caution and bet within their means. Additionally, the accuracy of the betting odds data extracted by this tool cannot be guaranteed, as bookmakers frequently update odds. Users are responsible for verifying the odds with the bookmaker before placing any bets. This tool is intended for personal use, and the user must ensure compliance with all local laws and regulations regarding online betting in their jurisdiction.
 
