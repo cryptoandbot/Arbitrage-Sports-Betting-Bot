@@ -60,8 +60,7 @@ RECIPIENT_EMAIL=your_email@example.com
 This will automatically change your recipient email in the script.
 
 ## Disclaimer
-Please gamble responsibly. I am not promoting gambling and this is just for my own personal interest and practice in Python. Also if you use this,
-please ensure that the odds are the same as stated from the script because sometimes bookmakers can change the odds very quickly.
+This tool is provided for educational and informational purposes only. It is important to note that gambling involves significant financial risk and may not be suitable for everyone. I do not promote or endorse gambling. Users are advised to exercise caution and bet within their means. Additionally, the accuracy of the betting odds data extracted by this tool cannot be guaranteed, as bookmakers frequently update odds. Users are responsible for verifying the odds with the bookmaker before placing any bets. This tool is intended for personal use, and the user must ensure compliance with all local laws and regulations regarding online betting in their jurisdiction.
 
 ## Prerequisites
 - Python3
