@@ -70,9 +70,9 @@ please ensure that the odds are the same as stated from the script because somet
 
 ## Installation
 1. Ensure Python is installed on your system.
-2. Install Selenium and Tabulate: `pip install selenium` and `pip install tabulate`
+2. Install Selenium, Tabulate and Python-Dotenv: `pip install selenium`, `pip install tabulate` and `pip install python-dotenv`
 3. Install Google Chrome (or change WebDriver to a browser of your choice)
-4. Clone this repository: `git clone [repository URL]`.
+4. Clone this repository: `git clone git@github.com:mxl1503/arbitrage-betting-bot.git`.
 
 ## Usage
 To run the scraper:
