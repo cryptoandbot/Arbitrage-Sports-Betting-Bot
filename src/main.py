@@ -44,11 +44,10 @@ def tabulate_data(team_dict):
         arb_opps.append(opp)
     
     matches_data = zip(home_team, away_team, arb_opps, home_bookie, home_odds, away_bookie, away_odds)
-
-    # Newline 
+ 
     print('')
-
     print(tabulate(matches_data, headers=["Home Team", "Away Team", 'Arb (%)', 'Bookie', 'Odds', 'Bookie', 'Odds']))
+    print('')
 
     alert_if_arb_opp(home_team, away_team, arb_opps, home_bookie, home_odds, away_bookie, away_odds)
 
