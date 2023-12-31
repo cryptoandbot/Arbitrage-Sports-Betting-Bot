@@ -27,6 +27,38 @@ Magic has a 54.05% chance of winning. This is calculated by taking 1 divided by 
 You'll notice that the probability adds up to over 100%. This essentially means that if you bet on both outcomes, you'll lose a little bit of money each time, ensuring the bookie makes money.
 However, in rare cases, you'll find odds that result in a probability that sums to under 100%, representing an arbitrage betting opportunity. Taking the same scenario, suppose I found a bookmaker who offered odds of 2.10 for the Magic to win. Summing the inverses of the odds, we get 1/2.00 + 1/2.10 = 97.62%. This represents an arbitrage opportunity (as it's below 100%) and we can place wagers proportional to the betting odds to guarantee profit.
 
+## Secure Email Credentials with a `.env` File
+
+### Setting Up The `.env` File
+To securely handle your email credentials for alert notifications:
+1. Create a `.env` file in your project root directory.
+2. Add your email and password to this file:
+```
+EMAIL_ADDRESS=your_email@example.com
+EMAIL_PASSWORD=your_password
+```
+3. Ensure that `.env` is listed in your `.gitignore` to keep your credentials secure.
+
+### Accessing Credentials in Python
+Use the `dotenv` package to load and access these variables in your Python scripts:
+```python
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+email = os.getenv('EMAIL_ADDRESS')
+password = os.getenv('EMAIL_PASSWORD')
+```
+This is done in `src/email_alert.py` so adding to the `.env` file is sufficient
+
+### Setting the Recipient's Email
+Similarly, use the `.env` file to set the recipient's email. Add to the file 
+your recipient email in the format:
+```
+RECIPIENT_EMAIL=your_email@example.com
+```
+This will automatically change your recipient email in the script.
+
 ## Disclaimer
 Please gamble responsibly. I am not promoting gambling and this is just for my own personal interest and practice in Python. Also if you use this,
 please ensure that the odds are the same as stated from the script because sometimes bookmakers can change the odds very quickly.
