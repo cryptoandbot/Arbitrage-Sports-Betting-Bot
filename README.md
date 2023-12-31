@@ -104,6 +104,8 @@ Currently the script uses the following bookmakers to find arbitrage opportuniti
 - Pointsbet
 - Unibet
 
+More to be added soon!
+
 ## Acknowledgements
 Project inspired by the following sources:
 - **How Web Scraping is Transforming the World with its Applications** by Hiren Patel (https://towardsdatascience.com/https-medium-com-hiren787-patel-web-scraping-applications-a6f370d316f4)
