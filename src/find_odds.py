@@ -63,25 +63,6 @@ def find_playup_odds(driver, team_dict, bookie_url):
         except ValueError:
             print(f"Team {team} not found in odds list")
 
-# def find_bet365_odds(driver, team_dict, bookie_url):
-#     driver.get(bookie_url)
-
-#     # Wait for website to load properly
-#     wait = WebDriverWait(driver, 15)
-#     wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "sac-ParticipantOddsOnly50OTB_Odds")))
-
-#     odds_elements = driver.find_elements(By.CLASS_NAME, "sac-ParticipantOddsOnly50OTB_Odds")
-#     odds = [odd.text for odd in odds_elements]
-#     print(odds)
-
-# def find_tab_odds(driver, team_dict, bookie_url):
-#     driver.get(bookie_url)
-#     time.sleep(1)
-#     elements = driver.find_elements(By.CSS_SELECTOR, "animate-odd")
-
-#     for element in elements:
-#         print(element.text)
-
 def find_pointsbet_odds(driver, team_dict, bookie_url):
     driver.get(bookie_url)
     time.sleep(1)

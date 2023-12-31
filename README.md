@@ -8,6 +8,7 @@ helping make more informed decisions as well as be alerted when an arbitrage bet
 - **Automated Scraping:** Collects odds from multiple bookmaker websites.
 - **Team Odds Comparison:** Compares odds across different platforms to find the best available odds for each team.
 - **Arbitrage Opportunity Calculator:** Finds arbitrage opportunities when present.
+- **Bet Sizing and ROI Calculation:** Calculates the optimal bet size for each outcome and the expected return on investment (ROI) for arbitrage opportunities.
 - **Custom Alert System:** Alert users via email when arbitrage betting opportunities arise.
 
 ## Planned Future Features
@@ -26,6 +27,15 @@ Magic has a 54.05% chance of winning. This is calculated by taking 1 divided by 
 
 You'll notice that the probability adds up to over 100%. This essentially means that if you bet on both outcomes, you'll lose a little bit of money each time, ensuring the bookie makes money.
 However, in rare cases, you'll find odds that result in a probability that sums to under 100%, representing an arbitrage betting opportunity. Taking the same scenario, suppose I found a bookmaker who offered odds of 2.10 for the Magic to win. Summing the inverses of the odds, we get 1/2.00 + 1/2.10 = 97.62%. This represents an arbitrage opportunity (as it's below 100%) and we can place wagers proportional to the betting odds to guarantee profit.
+
+## Email Alert Content
+
+The email alert includes the following information:
+
+- The teams playing and their respective odds from different bookies.
+- The calculated bet size to place on each team.
+- The expected return and ROI for a given bet stake (default $100).
+- Arbitrage percentage indicating the profitability of the opportunity.
 
 ## Secure Email Credentials with a `.env` File
 
@@ -49,7 +59,12 @@ load_dotenv()
 email = os.getenv('EMAIL_ADDRESS')
 password = os.getenv('EMAIL_PASSWORD')
 ```
-This is done in `src/email_alert.py` so adding to the `.env` file is sufficient
+This is done in `src/email_alert.py` so adding to the `.env` file is sufficient.
+
+### Authentication Error
+This is a common issue even if you've inputted the correct email and password. Instead,
+create an app specific password (requires you to have 2FA turned on) and instead use the
+app specific password you've created. This will fix this issue
 
 ### Setting the Recipient's Email
 Similarly, use the `.env` file to set the recipient's email. Add to the file 
@@ -58,8 +73,6 @@ your recipient email in the format:
 RECIPIENT_EMAIL=your_email@example.com
 ```
 This will automatically change your recipient email in the script.
-
-Here's what the email alert looks like: https://imgur.com/a/gj2k9Y6
 
 ## Disclaimer
 This tool is provided for educational and informational purposes only. It is important to note that gambling involves significant financial risk and may not be suitable for everyone. I do not promote or endorse gambling. Users are advised to exercise caution and bet within their means. Additionally, the accuracy of the betting odds data extracted by this tool cannot be guaranteed, as bookmakers frequently update odds. Users are responsible for verifying the odds with the bookmaker before placing any bets. This tool is intended for personal use, and the user must ensure compliance with all local laws and regulations regarding online betting in their jurisdiction.
