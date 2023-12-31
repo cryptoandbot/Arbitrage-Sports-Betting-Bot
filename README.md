@@ -38,7 +38,7 @@ please ensure that the odds are the same as stated from the script because somet
 
 ## Installation
 1. Ensure Python is installed on your system.
-2. Install Selenium: `pip install selenium`.
+2. Install Selenium and Tabulate: `pip install selenium` and `pip install tabulate`
 3. Install Google Chrome (or change WebDriver to a browser of your choice)
 4. Clone this repository: `git clone [repository URL]`.
 

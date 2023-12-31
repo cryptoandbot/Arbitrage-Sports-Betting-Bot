@@ -1,8 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from tabulate import tabulate
 import time
 
@@ -128,12 +126,17 @@ def find_unibet_odds(driver, team_dict, bookie_url):
     names = [name.text for name in name_elements]
 
     for i in range(len(odds)):
-        team_name = names[i]
+        try:        
+            team_name = names[i]
 
-        # Check if any odds are better at Unibet and update accordingly
-        betting_odds = float(odds[i])
-        if team_dict[team_name][0] < betting_odds:
-            team_dict[team_name] = (betting_odds, "UNIBET") 
+            # Check if any odds are better at Unibet and update accordingly
+            betting_odds = float(odds[i])
+            if team_dict[team_name][0] < betting_odds:
+                team_dict[team_name] = (betting_odds, "UNIBET") 
+        except KeyError:
+            # Sometimes teams playing will break the odds mapping so just break
+            # and ignore this case
+            break
       
 def redirector_function(driver, bookie_info, team_dict):
     bookie_name = bookie_info[0]
@@ -173,7 +176,8 @@ def tabulate_data(team_dict):
         opp = (1/home_odds[i] + 1/away_odds[i]) * 100
         arb_opps.append(opp)
     
-    
+    matches_data = zip(home_team, away_team, arb_opps, home_bookie, home_odds, away_bookie, away_odds)
+    print(tabulate(matches_data, headers=["Home Team", "Away Team", 'Arb (%)', 'Bookie', 'Odds', 'Bookie', 'Odds']))
 
 def main():
     nba_urls = [
