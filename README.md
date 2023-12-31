@@ -8,9 +8,9 @@ helping make more informed decisions as well as be alerted when an arbitrage bet
 - **Automated Scraping:** Collects odds from multiple bookmaker websites.
 - **Team Odds Comparison:** Compares odds across different platforms to find the best available odds for each team.
 - **Arbitrage Opportunity Calculator:** Finds arbitrage opportunities when present.
+- **Custom Alert System:** Alert users via email when arbitrage betting opportunities arise.
 
 ## Planned Future Features
-- **Custom Alert System:** Alert users when arbitrage betting opportunities arise.
 - **Works With Multiple Sports:** Functional for multiple sports to find more arbitrage opportunities. 
 - **Adding More Bookies:** Add functionality for Bluebet, Bet365, TAB and more.
 
