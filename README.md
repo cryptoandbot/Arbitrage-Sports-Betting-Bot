@@ -19,7 +19,7 @@ helping make more informed decisions as well as be alerted when an arbitrage bet
 ### What is Arbitrage Betting?
 Arbitrage betting is a betting strategy where you place bets on all possible outcomes of an event with different bookmakers, taking advantage of differing odds to guarantee a profit regardless of the event's result.
 
-### The Maths
+### The Maths Explained
 We can exploit the variation in odds offered by different bookmakers to ensure a profit. A bookmaker sets odds based on the expected probability of a particular outcome. Let's consider the odds offered
 by Sportsbet on a NY Knicks vs Orlando Magic game on 30/12/23. The odds of 2.00 and 1.85 respectively suggest that the bookmaker believes that the Knicks have a 50% chance of winning, and that the
 Magic has a 54.05% chance of winning. This is calculated by taking 1 divided by the odds offered (1/odds). 
