@@ -15,6 +15,10 @@ helping make more informed decisions as well as be alerted when an arbitrage bet
 - **Works With Multiple Sports:** Functional for multiple sports to find more arbitrage opportunities. 
 - **Adding More Bookies:** Add functionality for Bluebet, Bet365, TAB and more.
 
+### Known Issues
+- When games are being played, each bookie displays live odds differently that needs to be accounted for. Additionally, if a live game's odds get suspended, a float conversion error should be thrown.
+- Unibet 'features' certain games sometimes and causes the odds to be listed incorrectly. Will be fixed once I get some more data on how they feature games (since they didn't do so in the past?)
+
 ## Arbitrage Betting Explained
 
 ### What is Arbitrage Betting?
