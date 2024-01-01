@@ -25,12 +25,14 @@ We can take advantage of the differences in odds offered by various bookmakers t
 reflect the expected probabilities of the outcomes of an event. For example, consider a basketball game between the NY Knicks and Orlando Magic, where Sportsbet offers odds of 2.00 for the Knicks and 1.85 
 for the Magic. These odds imply that Sportsbet estimates a 50% chance of the Knicks winning (calculated as 1 divided by the odds, or 1/2.00) and a 54.05% chance for the Magic (1/1.85).
 
-The combined probability exceeds 100% (50% + 54.05% = 104.05%), which is typical in betting markets. This overround ensures that the bookmaker profits regardless of the outcome if bets are evenly 
-distributed. However, arbitrage opportunities arise when the combined implied probabilities of all possible outcomes are less than 100%. For instance, if another bookmaker offers odds of 2.10 for the Magic, 
-the combined probability becomes 1/2.00 + 1/2.10, which equals 97.62%. This under 100% total indicates an arbitrage opportunity, with an ROI of 2.38% (calculated by 100% - combined probability).
+You'll notice that the combined probability exceeds 100% (50% + 54.05% = 104.05%), which is typical in betting markets. This essentially ensures that the bookmaker profits regardless of the outcome if bets 
+are evenly distributed. However, arbitrage opportunities arise when the combined implied probabilities of all possible outcomes are less than 100%. For instance, if another bookmaker offers odds of 
+2.10 for the Magic, the combined probability becomes 1/2.00 + 1/2.10, which equals 97.62%. This under 100% total indicates an arbitrage opportunity, with an ROI of 2.38% (calculated by 100% - 
+combined probability).
 
 We also need to calculate how much to bet on each outcome to ensure we make the same return regardless of the game's actual outcome. To determine the bet sizing, we take the expected return and divide
-through by the odds offered on each outcome. In this example, let's suppose I'm betting with $100. Since I know my ROI is 2.38%, I can expect a return of $102.38. This means that I'll bet $51.19 on the Knicks and $38.75 on the Magic to ensure a profit is made. These bets were calculated by taking my expected return of $102.38, and dividing it by each team's odds to find the bet sizing. In this case, 
+through by the odds offered on each outcome. In this example, let's suppose I'm betting with $100. Since I know my ROI is 2.38%, I can expect a return of $102.38. This means that I'll bet $51.19 on the 
+Knicks and $38.75 on the Magic to ensure a profit is made. These bets were calculated by taking my expected return of $102.38, and dividing it by each team's odds to find the bet sizing. In this case, 
 $102.38/2.00 = $51.19 and $102.38/2.10 = $38.75 giving me the amount to bet on the Knicks and Magic respectively. 
 
 ## Email Alert Content
