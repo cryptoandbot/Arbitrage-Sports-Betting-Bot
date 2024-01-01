@@ -21,12 +21,17 @@ helping make more informed decisions as well as be alerted when an arbitrage bet
 Arbitrage betting is a betting strategy where you place bets on all possible outcomes of an event with different bookmakers, taking advantage of differing odds to guarantee a profit regardless of the event's result.
 
 ### The Maths Explained
-We can exploit the variation in odds offered by different bookmakers to ensure a profit. A bookmaker sets odds based on the expected probability of a particular outcome. Let's consider the odds offered
-by Sportsbet on a NY Knicks vs Orlando Magic game on 30/12/23. The odds of 2.00 and 1.85 respectively suggest that the bookmaker believes that the Knicks have a 50% chance of winning, and that the
-Magic has a 54.05% chance of winning. This is calculated by taking 1 divided by the odds offered (1/odds). 
+We can take advantage of the differences in odds offered by various bookmakers to secure a guaranteed profit. This strategy, known as arbitrage betting, is based on the principle that bookmakers set odds to 
+reflect the expected probabilities of the outcomes of an event. For example, consider a basketball game between the NY Knicks and Orlando Magic, where Sportsbet offers odds of 2.00 for the Knicks and 1.85 
+for the Magic. These odds imply that Sportsbet estimates a 50% chance of the Knicks winning (calculated as 1 divided by the odds, or 1/2.00) and a 54.05% chance for the Magic (1/1.85).
 
-You'll notice that the probability adds up to over 100%. This essentially means that if you bet on both outcomes, you'll lose a little bit of money each time, ensuring the bookie makes money.
-However, in rare cases, you'll find odds that result in a probability that sums to under 100%, representing an arbitrage betting opportunity. Taking the same scenario, suppose I found a bookmaker who offered odds of 2.10 for the Magic to win. Summing the inverses of the odds, we get 1/2.00 + 1/2.10 = 97.62%. This represents an arbitrage opportunity (as it's below 100%) and we can place wagers proportional to the betting odds to guarantee profit.
+The combined probability exceeds 100% (50% + 54.05% = 104.05%), which is typical in betting markets. This overround ensures that the bookmaker profits regardless of the outcome if bets are evenly 
+distributed. However, arbitrage opportunities arise when the combined implied probabilities of all possible outcomes are less than 100%. For instance, if another bookmaker offers odds of 2.10 for the Magic, 
+the combined probability becomes 1/2.00 + 1/2.10, which equals 97.62%. This under 100% total indicates an arbitrage opportunity, with an ROI of 2.38% (calculated by 100% - combined probability).
+
+We also need to calculate how much to bet on each outcome to ensure we make the same return regardless of the game's actual outcome. To determine the bet sizing, we take the expected return and divide
+through by the odds offered on each outcome. In this example, let's suppose I'm betting with $100. Since I know my ROI is 2.38%, I can expect a return of $102.38. This means that I'll bet $51.19 on the Knicks and $38.75 on the Magic to ensure a profit is made. These bets were calculated by taking my expected return of $102.38, and dividing it by each team's odds to find the bet sizing. In this case, 
+$102.38/2.00 = $51.19 and $102.38/2.10 = $38.75 giving me the amount to bet on the Knicks and Magic respectively. 
 
 ## Email Alert Content
 
