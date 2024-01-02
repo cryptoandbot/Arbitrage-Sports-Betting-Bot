@@ -40,7 +40,7 @@ def tabulate_data(team_dict):
 
     arb_opps = []
     for i in range(len(home_odds)):
-        opp = (1/home_odds[i] + 1/away_odds[i]) * 100
+        opp = round((1/home_odds[i] + 1/away_odds[i]) * 100, 3)
         arb_opps.append(opp)
     
     matches_data = zip(home_team, away_team, arb_opps, home_bookie, home_odds, away_bookie, away_odds)
