@@ -1,8 +1,10 @@
 # Arbitrage Betting Bot
 
 ## Overview
-This project is a Python-based tool that scrapes betting odds from various bookmaker websites. It aims to identify the best odds for each team playing on a given day, allowing users to quickly compare odds,
-helping make more informed decisions as well as be alerted when an arbitrage betting opportunity arises. Currently, the script is designed for NBA games only.
+This project is a Python-based tool that scrapes betting odds from various bookmaker websites. It aims to identify the best odds for each team 
+playing on a given day, allowing users to quickly compare odds, helping make more informed decisions as well as be alerted when an arbitrage 
+betting opportunity arises. Currently, the script is designed for NBA games only. Please also note that due to region restrictions, this tool
+is designed solely for use in Australia.
 
 ## Features
 - **Automated Scraping:** Collects odds from multiple bookmaker websites.
@@ -12,8 +14,9 @@ helping make more informed decisions as well as be alerted when an arbitrage bet
 - **Custom Alert System:** Alert users via email when arbitrage betting opportunities arise.
 
 ## Planned Future Features
-- **Works With Multiple Sports:** Functional for multiple sports to find more arbitrage opportunities. 
+- **Works With Multiple Sports:** Add functionality for multiple sports to find more arbitrage opportunities. 
 - **Adding More Bookies:** Add functionality for Bluebet, Bet365, TAB and more.
+- **Live Betting Calculator:** Add functionality for live betting markets (which often offer far better arbitrage opportunities).
 
 ### Known Issues
 - When games are being played, each bookie displays live odds differently that needs to be accounted for. Additionally, if a live game's odds get suspended, a float conversion error should be thrown.
