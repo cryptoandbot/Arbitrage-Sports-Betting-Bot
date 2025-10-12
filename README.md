@@ -1,72 +1,104 @@
-# Arbitrage Betting Bot
+# 🏀 Arbitrage Betting Bot
 
 ## Overview
-This project is a Python-based tool that scrapes betting odds from various bookmaker websites. It aims to identify the best odds for each team 
-playing on a given day, allowing users to quickly compare odds, helping make more informed decisions as well as be alerted when an arbitrage 
-betting opportunity arises. Currently, the script is designed for NBA games only. Please also note that due to region restrictions, this tool
-is designed solely for use in Australia.
 
-## Features
-- **Automated Scraping:** Collects odds from multiple bookmaker websites.
-- **Team Odds Comparison:** Compares odds across different platforms to find the best available odds for each team.
-- **Arbitrage Opportunity Calculator:** Finds arbitrage opportunities when present.
-- **Bet Sizing and ROI Calculation:** Calculates the optimal bet size for each outcome and the expected return on investment (ROI) for arbitrage opportunities.
-- **Custom Alert System:** Alert users via email when arbitrage betting opportunities arise.
+**Arbitrage Betting Bot** is a Python-based automation tool that scrapes and compares betting odds across multiple bookmaker websites to identify profitable arbitrage opportunities. Designed initially for **NBA games** and optimized for **Australian betting platforms**, the bot helps users quickly compare odds, calculate potential returns, and receive instant alerts when guaranteed-profit scenarios arise.
 
-## Planned Future Features
-- **Works With Multiple Sports:** Add functionality for multiple sports to find more arbitrage opportunities. 
-- **Adding More Bookies:** Add functionality for Bluebet, Bet365, TAB and more.
-- **Live Betting Calculator:** Add functionality for live betting markets (which often offer far better arbitrage opportunities).
+> ⚠️ **Note:** This tool is intended **for educational and informational use only**. It does not promote or encourage gambling.
 
-### Known Issues
-- When games are being played, each bookie displays live odds differently that needs to be accounted for. Additionally, if a live game's odds get suspended, a float conversion error should be thrown.
-- Unibet 'features' certain games sometimes and causes the odds to be listed incorrectly. Will be fixed once I get some more data on how they feature games (since they didn't do so in the past?)
+---
 
-## Arbitrage Betting Explained
+## 🚀 Features
 
-### What is Arbitrage Betting?
-Arbitrage betting is a betting strategy where you place bets on all possible outcomes of an event with different bookmakers, taking advantage of differing odds to guarantee a profit regardless of the event's result.
+* **Automated Odds Scraping** – Collects live betting odds from multiple bookmakers using Selenium.
+* **Cross-Bookmaker Comparison** – Identifies the best odds for each team across supported platforms.
+* **Arbitrage Detection** – Calculates combined probabilities to detect risk-free profit opportunities.
+* **Bet Sizing & ROI Estimation** – Computes the optimal stake distribution and expected ROI for each arbitrage event.
+* **Email Alerts** – Sends automatic notifications when new arbitrage opportunities are found.
 
-### The Maths Explained
-We can take advantage of the differences in odds offered by various bookmakers to secure a guaranteed profit. This strategy, known as arbitrage betting, is based on the principle that bookmakers set odds to 
-reflect the expected probabilities of the outcomes of an event. For example, consider a basketball game between the NY Knicks and Orlando Magic, where Sportsbet offers odds of 2.00 for the Knicks and 1.85 
-for the Magic. These odds imply that Sportsbet estimates a 50% chance of the Knicks winning (calculated as 1 divided by the odds, or 1/2.00) and a 54.05% chance for the Magic (1/1.85).
+---
 
-You'll notice that the combined probability exceeds 100% (50% + 54.05% = 104.05%), which is typical in betting markets. This essentially ensures that the bookmaker profits regardless of the outcome if bets 
-are evenly distributed. However, arbitrage opportunities arise when the combined implied probabilities of all possible outcomes are less than 100%. For instance, if another bookmaker offers odds of 
-2.10 for the Magic, the combined probability becomes 1/2.00 + 1/2.10, which equals 97.62%. This under 100% total indicates an arbitrage opportunity, with an ROI of 2.38% (calculated by 100% - 
-combined probability).
+## 🧩 Planned Enhancements
 
-We also need to calculate how much to bet on each outcome to ensure we make the same return regardless of the game's actual outcome. To determine the bet sizing, we take the expected return and divide
-through by the odds offered on each outcome. In this example, let's suppose I'm betting with $100. Since I know my ROI is 2.38%, I can expect a return of $102.38. This means that I'll bet $51.19 on the 
-Knicks and $38.75 on the Magic to ensure a profit is made. These bets were calculated by taking my expected return of $102.38, and dividing it by each team's odds to find the bet sizing. In this case, 
-$102.38/2.00 = $51.19 and $102.38/2.10 = $38.75 giving me the amount to bet on the Knicks and Magic respectively. 
+* **Multi-Sport Support:** Extend functionality to additional sports beyond NBA.
+* **Expanded Bookmaker Coverage:** Integrate more platforms (e.g., BlueBet, Bet365, TAB).
+* **Live Betting Module:** Implement support for real-time betting markets, which often yield higher arbitrage margins.
 
-## Email Alert Content
+---
 
-The email alert includes the following information:
+## ⚠️ Known Issues
 
-- The teams playing and their respective odds from different bookies.
-- The calculated bet size to place on each team.
-- The expected return and ROI for a given bet stake (default $100).
-- Arbitrage percentage indicating the profitability of the opportunity.
+* **Live Odds Variability:** Bookmakers format live odds differently; live game suspensions may trigger float conversion errors.
+* **Unibet Game “Features”:** Occasionally misaligns odds display. Will be resolved once more data is collected on their featured-game formatting.
 
-A sample email alert can be seen here: https://imgur.com/a/6oP44W7
+---
 
-## Secure Email Credentials with a `.env` File
+## 📘 Understanding Arbitrage Betting
 
-### Setting Up The `.env` File
-To securely handle your email credentials for alert notifications:
-1. Create a `.env` file in your project root directory.
-2. Add your email and password to this file:
+### What Is Arbitrage Betting?
+
+Arbitrage betting (or “arbing”) involves placing bets on **all possible outcomes** of an event with **different bookmakers** to lock in a profit regardless of the result. It exploits inconsistencies in odds between platforms.
+
+### The Mathematics Behind It
+
+Bookmakers set odds based on implied probabilities. For instance:
+
+* Sportsbet offers **2.00** on the Knicks → 50% implied probability
+* Sportsbet offers **1.85** on the Magic → 54.05% implied probability
+* Combined total: **104.05%**, ensuring the bookmaker’s margin.
+
+An arbitrage occurs when the **combined probability** is **below 100%**.
+If another bookmaker offers **2.10** for the Magic, the combined probability becomes:
+
 ```
+1/2.00 + 1/2.10 = 0.9762 → 97.62%
+```
+
+That implies a **2.38% ROI** opportunity.
+
+#### Bet Sizing Example
+
+To guarantee equal profit, distribute your $100 stake proportionally:
+
+* Expected return: $102.38
+* Bet on Knicks: 102.38 / 2.00 = **$51.19**
+* Bet on Magic: 102.38 / 2.10 = **$48.75**
+
+Result: A **guaranteed profit** regardless of outcome.
+
+---
+
+## 📩 Email Alerts
+
+Each arbitrage alert includes:
+
+* Teams and bookmakers involved
+* Current odds for both outcomes
+* Recommended stake per outcome (based on a $100 base bet)
+* Expected return and ROI percentage
+
+🔗 [Sample Email Screenshot](https://imgur.com/a/6oP44W7)
+
+---
+
+## 🔐 Secure Email Credentials with `.env`
+
+### Setting Up
+
+Create a `.env` file in your project root:
+
+```bash
 EMAIL_ADDRESS=your_email@example.com
-EMAIL_PASSWORD=your_password
+EMAIL_PASSWORD=your_app_specific_password
+RECIPIENT_EMAIL=recipient@example.com
 ```
-3. Ensure that `.env` is listed in your `.gitignore` to keep your credentials secure.
 
-### Accessing Credentials in Python
-Use the `dotenv` package to load and access these variables in your Python scripts:
+> ⚠️ Use **app-specific passwords** (with 2FA enabled) instead of your main account password.
+
+Ensure `.env` is listed in `.gitignore` to protect credentials.
+
+### Accessing in Code
+
 ```python
 from dotenv import load_dotenv
 import os
@@ -74,55 +106,74 @@ import os
 load_dotenv()
 email = os.getenv('EMAIL_ADDRESS')
 password = os.getenv('EMAIL_PASSWORD')
+recipient = os.getenv('RECIPIENT_EMAIL')
 ```
-This is done in `src/email_alert.py` so adding to the `.env` file is sufficient.
 
-### Authentication Error
-This is a common issue even if you've inputted the correct email and password. Instead,
-create an app specific password (requires you to have 2FA turned on) and instead use the
-app specific password you've created. This will fix this issue
+This setup is automatically handled in `src/email_alert.py`.
 
-### Setting the Recipient's Email
-Similarly, use the `.env` file to set the recipient's email. Add to the file 
-your recipient email in the format:
+---
+
+## ⚖️ Disclaimer
+
+This software is intended **solely for educational and informational purposes**. Betting involves financial risk and may be restricted by law in some regions.
+The author does **not guarantee accuracy** of scraped odds or promote gambling activity. Always verify odds directly with bookmakers and ensure compliance with local laws before use.
+
+---
+
+## 🛠️ Prerequisites
+
+* **Python 3.x**
+* **Selenium**
+* **Google Chrome** (or modify WebDriver for another browser)
+
+---
+
+## ⚙️ Installation
+
+```bash
+# Clone the repository
+git clone git@github.com:mxl1503/arbitrage-betting-bot.git
+
+# Navigate to the project directory
+cd arbitrage-betting-bot
+
+# Install dependencies
+pip install selenium tabulate python-dotenv
 ```
-RECIPIENT_EMAIL=your_email@example.com
-```
-This will automatically change your recipient email in the script.
 
-## Disclaimer
-This tool is provided for educational and informational purposes only. It is important to note that gambling involves significant financial risk and may not be suitable for everyone. I do not promote or endorse gambling. Users are advised to exercise caution and bet within their means. Additionally, the accuracy of the betting odds data extracted by this tool cannot be guaranteed, as bookmakers frequently update odds. Users are responsible for verifying the odds with the bookmaker before placing any bets. This tool is intended for personal use, and the user must ensure compliance with all local laws and regulations regarding online betting in their jurisdiction.
+---
 
-## Prerequisites
-- Python3
-- Selenium
-- Chrome (can change to any modern browser with small code modifications)
+## ▶️ Usage
 
-## Installation
-1. Ensure Python is installed on your system.
-2. Install Selenium, Tabulate and Python-Dotenv: `pip install selenium`, `pip install tabulate` and `pip install python-dotenv`
-3. Install Google Chrome (or change WebDriver to a browser of your choice)
-4. Clone this repository: `git clone git@github.com:mxl1503/arbitrage-betting-bot.git`.
+To start the scraper:
 
-## Usage
-To run the scraper:
 ```bash
 python3 src/main.py
 ```
 
-## Supported Bookmakers
-Currently the script uses the following bookmakers to find arbitrage opportunities:
-- Ladbrokes
-- Sportsbet
-- Playup
-- Pointsbet
-- Unibet
+---
 
-More to be added soon!
+## 🎯 Supported Bookmakers
 
-## Acknowledgements
-Project inspired by the following sources:
-- **How Web Scraping is Transforming the World with its Applications** by Hiren Patel (https://towardsdatascience.com/https-medium-com-hiren787-patel-web-scraping-applications-a6f370d316f4)
-- **How I got banned from sports betting... - Arbitrage Betting Explained** by New Money (https://www.youtube.com/watch?v=TGinzvSDayU)
-- **I Used Arbitrage Betting Strategy for 30 Days – Results & Explanation** by Caan Berry Pro Trader (https://www.youtube.com/watch?v=gsXcOpmf75U)
-- **How I built a sports betting bot | Arbitrage Betting Explained** by Victor Fang (https://www.youtube.com/watch?v=q-NKvlGHJD4)
+Currently integrated platforms:
+
+* Ladbrokes
+* Sportsbet
+* PlayUp
+* PointsBet
+* Unibet
+
+*More integrations coming soon.*
+
+---
+
+## 🙌 Acknowledgements
+
+Inspired by:
+
+* [How Web Scraping is Transforming the World with its Applications – Hiren Patel](https://towardsdatascience.com/https-medium-com-hiren787-patel-web-scraping-applications-a6f370d316f4)
+* [How I Got Banned from Sports Betting... Arbitrage Betting Explained – New Money](https://www.youtube.com/watch?v=TGinzvSDayU)
+* [I Used Arbitrage Betting Strategy for 30 Days – Caan Berry Pro Trader](https://www.youtube.com/watch?v=gsXcOpmf75U)
+* [How I Built a Sports Betting Bot | Arbitrage Betting Explained – Victor Fang](https://www.youtube.com/watch?v=q-NKvlGHJD4)
+
+---
