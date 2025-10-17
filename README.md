@@ -1,14 +1,14 @@
-# 🏀 Arbitrage Betting Bot
+# Arbitrage Betting Bot
 
 ## Overview
 
 **Arbitrage Betting Bot** is a Python-based automation tool that scrapes and compares betting odds across multiple bookmaker websites to identify profitable arbitrage opportunities. Designed initially for **NBA games** and optimized for **Australian betting platforms**, the bot helps users quickly compare odds, calculate potential returns, and receive instant alerts when guaranteed-profit scenarios arise.
 
-> ⚠️ **Note:** This tool is intended **for educational and informational use only**. It does not promote or encourage gambling.
+>  **Note:** This tool is intended **for educational and informational use only**. It does not promote or encourage gambling.
 
 ---
 
-## 🚀 Features
+## Features
 
 * **Automated Odds Scraping** – Collects live betting odds from multiple bookmakers using Selenium.
 * **Cross-Bookmaker Comparison** – Identifies the best odds for each team across supported platforms.
@@ -18,7 +18,7 @@
 
 ---
 
-## 🧩 Planned Enhancements
+## Planned Enhancements
 
 * **Multi-Sport Support:** Extend functionality to additional sports beyond NBA.
 * **Expanded Bookmaker Coverage:** Integrate more platforms (e.g., BlueBet, Bet365, TAB).
@@ -26,14 +26,14 @@
 
 ---
 
-## ⚠️ Known Issues
+## Known Issues
 
 * **Live Odds Variability:** Bookmakers format live odds differently; live game suspensions may trigger float conversion errors.
 * **Unibet Game “Features”:** Occasionally misaligns odds display. Will be resolved once more data is collected on their featured-game formatting.
 
 ---
 
-## 📘 Understanding Arbitrage Betting
+## Understanding Arbitrage Betting
 
 ### What Is Arbitrage Betting?
 
@@ -68,7 +68,7 @@ Result: A **guaranteed profit** regardless of outcome.
 
 ---
 
-## 📩 Email Alerts
+## Email Alerts
 
 Each arbitrage alert includes:
 
@@ -81,7 +81,7 @@ Each arbitrage alert includes:
 
 ---
 
-## 🔐 Secure Email Credentials with `.env`
+## Secure Email Credentials with `.env`
 
 ### Setting Up
 
@@ -93,7 +93,7 @@ EMAIL_PASSWORD=your_app_specific_password
 RECIPIENT_EMAIL=recipient@example.com
 ```
 
-> ⚠️ Use **app-specific passwords** (with 2FA enabled) instead of your main account password.
+>  Use **app-specific passwords** (with 2FA enabled) instead of your main account password.
 
 Ensure `.env` is listed in `.gitignore` to protect credentials.
 
@@ -113,14 +113,14 @@ This setup is automatically handled in `src/email_alert.py`.
 
 ---
 
-## ⚖️ Disclaimer
+## Disclaimer
 
 This software is intended **solely for educational and informational purposes**. Betting involves financial risk and may be restricted by law in some regions.
 The author does **not guarantee accuracy** of scraped odds or promote gambling activity. Always verify odds directly with bookmakers and ensure compliance with local laws before use.
 
 ---
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 * **Python 3.x**
 * **Selenium**
@@ -128,7 +128,7 @@ The author does **not guarantee accuracy** of scraped odds or promote gambling a
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -143,7 +143,7 @@ pip install selenium tabulate python-dotenv
 
 ---
 
-## ▶️ Usage
+## Usage
 
 To start the scraper:
 
@@ -153,7 +153,7 @@ python3 src/main.py
 
 ---
 
-## 🎯 Supported Bookmakers
+## Supported Bookmakers
 
 Currently integrated platforms:
 
@@ -167,7 +167,7 @@ Currently integrated platforms:
 
 ---
 
-## 🙌 Acknowledgements
+## Acknowledgements
 
 Inspired by:
 
