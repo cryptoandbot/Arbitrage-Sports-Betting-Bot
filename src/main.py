@@ -1,3 +1,4 @@
+# Main arbitrage betting bot - scrapes odds and identifies opportunities
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from tabulate import tabulate

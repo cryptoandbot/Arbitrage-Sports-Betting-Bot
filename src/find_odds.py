@@ -1,3 +1,4 @@
+# Web scraping functions to find betting odds from various bookmakers
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 import time
